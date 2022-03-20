@@ -12,12 +12,37 @@ message("CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 # necessary at least on ubuntu
 list(APPEND CMAKE_PREFIX_PATH "/usr/lib/x86_64-linux-gnu/cmake/")
 
-link_directories("/usr/lib/x86_64-linux-gnu/")
+set (CMAKE_CXX_STANDARD 17)
+set (CMAKE_C_STANDARD 17)
+
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSK_GL" )
 
 find_package(glfw3 3.3 REQUIRED)
 find_package(OpenGL 3.2 REQUIRED)
 
+link_directories("/usr/lib/x86_64-linux-gnu/")
+include_directories(${PROJECT_NAME} PRIVATE 
+    "/home/daniel/src/skia/libskia-dev/skia"
+    "/home/daniel/src/skia/libskia-dev/include"
+    )
+
+include_directories(${PROJECT_NAME} PRIVATE 
+    ${OPENGL_INCLUDE_DIRS})
+
+
 add_executable(clang-test clang-test.cpp)
 
-target_include_directories(${PROJECT_NAME} PRIVATE "$HOME/src/skia/libskia-dev/skia/include/core" ${OPENGL_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} dl glfw "/home/daniel/src/skia/libskia-dev/skia/out/Static/libskia.a" ${OPENGL_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} 
+    dl glfw 
+    "/home/daniel/src/skia/libskia-dev/skia/out/Static/libskia.a" 
+    jpeg
+    freetype
+    z
+    png
+    fontconfig
+    webp
+    webpmux
+    webpdemux
+    pthread
+    ${OPENGL_LIBRARIES})
+
