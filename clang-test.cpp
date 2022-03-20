@@ -19,8 +19,8 @@ int main()
 
     glfwSetErrorCallback(glfw_error_callback);
 
-    //glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
-    //glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+//    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+//    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
     GLFWwindow* window = glfwCreateWindow(640, 480, "GLFW Test", NULL, NULL);
 
     if(window)
@@ -29,9 +29,23 @@ int main()
         glfwMakeContextCurrent(window);
         // f.e. gladLoadGL(glfwGetProcAddress);
         
+        // vsync?
+        //glfwSwapInterval(1);
+        
+        int width, height;
+        glfwGetFramebufferSize(window, &width, &height);
+        glViewport(0, 0, width, height);
+
         while(!glfwWindowShouldClose(window))
         {
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+            glClear(GL_COLOR_BUFFER_BIT);
+            glClearColor(0, 1, 0, 0);
+
+            glfwSwapBuffers(window);
+
+            // glfwWaitEvents is an alternative
+            glfwPollEvents();
+//            std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
 
         glfwDestroyWindow(window);

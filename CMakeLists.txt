@@ -15,7 +15,9 @@ list(APPEND CMAKE_PREFIX_PATH "/usr/lib/x86_64-linux-gnu/cmake/")
 link_directories("/usr/lib/x86_64-linux-gnu/")
 
 find_package(glfw3 3.3 REQUIRED)
+find_package(OpenGL 3.2 REQUIRED)
 
 add_executable(clang-test clang-test.cpp)
 
-target_link_libraries(${PROJECT_NAME} dl glfw)
+target_include_directories(${PROJECT_NAME} PRIVATE "$HOME/src/skia/libskia-dev/skia/include/core" ${OPENGL_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} dl glfw "/home/daniel/src/skia/libskia-dev/skia/out/Static/libskia.a" ${OPENGL_LIBRARIES})
