@@ -2,6 +2,8 @@ Offizial documentation
 
 https://skia.org/docs/user/build/
 
+VERY HELPFUL: https://gist.github.com/Ard2148810/37a12c8642da824882098092a55bccea?msclkid=8d61dccca86d11ec92e1822fda5348f7
+
 Tried on Ubuntu 21.04
 
 # clone and compile harfbuzz
