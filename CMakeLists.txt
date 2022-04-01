@@ -21,16 +21,17 @@ find_package(glfw3 3.3 REQUIRED)
 find_package(OpenGL 3.2 REQUIRED)
 
 link_directories("/usr/lib/x86_64-linux-gnu/")
-include_directories(${PROJECT_NAME} PRIVATE 
+
+file(GLOB SOURCES src/*.cpp)
+
+add_executable(clang-test ${SOURCES})
+
+target_include_directories(${PROJECT_NAME}
+    PRIVATE
+    "src/"
     "/home/daniel/src/skia/libskia-dev/skia"
     "/home/daniel/src/skia/libskia-dev/include"
-    )
-
-include_directories(${PROJECT_NAME} PRIVATE 
     ${OPENGL_INCLUDE_DIRS})
-
-
-add_executable(clang-test clang-test.cpp)
 
 target_link_libraries(${PROJECT_NAME} 
     dl glfw 

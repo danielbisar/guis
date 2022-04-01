@@ -6,4 +6,4 @@ class Window
         Window();
 
     private:
-}
+};
