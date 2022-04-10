@@ -78,15 +78,28 @@ int main()
         initSkia(window.getWidth(), window.getHeight());
 
         SkCanvas *canvas = skSurface->getCanvas();
+        float f = 10;
 
         while (!glfwWindowShouldClose(window.getBackendWindow()))
         {
-            glfwWaitEvents();
+            // glfwWaitEvents();
+            glfwPollEvents();
 
             SkPaint paint;
             paint.setColor(SK_ColorYELLOW);
 
             canvas->drawPaint(paint);
+
+            paint.setColor(SK_ColorBLUE);
+            SkPoint p;
+            p.set(f, 10);
+
+            f += 1;
+
+            if (f > window.getWidth())
+                f = 0;
+
+            canvas->drawCircle(p, 10, paint);
 
             grContext->flush();
             glfwSwapBuffers(window.getBackendWindow());

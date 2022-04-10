@@ -31,8 +31,6 @@ namespace guiserver
         if (_window != nullptr)
             return;
 
-        glfwSwapInterval(1);
-
         _window = glfwCreateWindow(_width, _height, "GLFW Test", nullptr, nullptr);
 
         if (!_window)
@@ -45,7 +43,7 @@ namespace guiserver
         // f.e. gladLoadGL(glfwGetProcAddress);
 
         // vsync?
-        // glfwSwapInterval(1);
+        glfwSwapInterval(0);
 
         // int width, height;
         // glfwGetFramebufferSize(window, &width, &height);
