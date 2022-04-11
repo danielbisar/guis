@@ -1,5 +1,5 @@
 #include "window.hpp"
-#include "button.hpp"
+#include "control.hpp"
 
 #include <cstdlib>
 #include <iostream>
@@ -13,6 +13,11 @@
 #include <core/SkSurface.h>
 #include <gpu/gl/GrGLInterface.h>
 #include <gpu/GrDirectContext.h>
+
+#include <yaml-cpp/yaml.h>
+#include <yamlconverter.hpp>
+
+using namespace std;
 
 void glfw_error_callback(int error, const char *description)
 {
@@ -72,24 +77,27 @@ int main()
         initSkia(window.getWidth(), window.getHeight());
 
         SkCanvas *pCanvas = skSurface->getCanvas();
-        float f = 10;
-
-        guis::Button b;
-        b.setX(10);
-        b.setY(10);
-        b.setWidth(100);
-        b.setHeight(45);
-
         SkCanvas &canvas = *pCanvas;
+
+        YAML::Node n = YAML::LoadFile("../yamls/test.yaml");
+
+        vector<guis::Control> controls;
+
+        for (YAML::const_iterator it = n.begin(); it != n.end(); it++)
+        {
+            guis::Control control = (*it)["control"].as<guis::Control>();
+            controls.push_back(control);
+        }
 
         while (!glfwWindowShouldClose(window.getBackendWindow()))
         {
             glfwWaitEvents();
             // glfwPollEvents();
 
-            pCanvas->clear(SK_ColorWHITE);
+            canvas.clear(SK_ColorWHITE);
 
-            b.draw(canvas);
+            for (const guis::Control &control : controls)
+                control.draw(canvas);
 
             grContext->flush();
             glfwSwapBuffers(window.getBackendWindow());

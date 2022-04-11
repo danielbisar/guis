@@ -46,4 +46,5 @@ target_link_libraries(${PROJECT_NAME}
     webpmux
     webpdemux
     pthread
+    yaml-cpp
     ${OPENGL_LIBRARIES})

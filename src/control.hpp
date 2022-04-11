@@ -4,7 +4,7 @@
 
 namespace guis
 {
-    class Button
+    class Control
     {
     private:
         int _x;
@@ -13,7 +13,7 @@ namespace guis
         int _height;
 
     public:
-        void draw(SkCanvas &canvas);
+        void draw(SkCanvas &canvas) const;
 
         int getX();
         int getY();
