@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.18.4)
 
 # needs to be called before other methods, otherwise
 # strange errors might happen
-project(clang-test)
+project(guis)
 
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug)
@@ -18,24 +18,25 @@ set (CMAKE_C_STANDARD 17)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSK_GL" )
 
 find_package(glfw3 3.3 REQUIRED)
-find_package(OpenGL 3.2 REQUIRED)
+find_package(OpenGL REQUIRED)
 
 link_directories("/usr/lib/x86_64-linux-gnu/")
 
 file(GLOB SOURCES src/*.cpp)
 
-add_executable(clang-test ${SOURCES})
+add_executable(${PROJECT_NAME} ${SOURCES})
 
 target_include_directories(${PROJECT_NAME}
     PRIVATE
     "src/"
-    "/home/daniel/src/skia/libskia-dev/skia"
-    "/home/daniel/src/skia/libskia-dev/include"
+    "/home/daniel/src/skia/skia/include"
+    "/home/daniel/src/skia/skia"
     ${OPENGL_INCLUDE_DIRS})
 
-target_link_libraries(${PROJECT_NAME} 
-    dl glfw 
-    "/home/daniel/src/skia/libskia-dev/skia/out/Static/libskia.a" 
+target_link_libraries(${PROJECT_NAME}
+    dl
+    glfw
+    "/home/daniel/src/skia/skia/out/Static/libskia.a"
     jpeg
     freetype
     z
@@ -46,4 +47,3 @@ target_link_libraries(${PROJECT_NAME}
     webpdemux
     pthread
     ${OPENGL_LIBRARIES})
-

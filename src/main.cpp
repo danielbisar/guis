@@ -1,11 +1,5 @@
-
 #include "window.hpp"
 
-#include "include/core/SkColor.h"
-#include "include/core/SkImageInfo.h"
-#include "include/gpu/GrBackendSurface.h"
-#include "include/gpu/GrTypes.h"
-#include "include/gpu/gl/GrGLTypes.h"
 #include <cstdlib>
 #include <iostream>
 #include <thread>
@@ -13,14 +7,11 @@
 
 #include <GLFW/glfw3.h>
 
-#include <include/gpu/gl/GrGLInterface.h>
-#include <include/gpu/GrDirectContext.h>
-#include <include/gpu/GrContextOptions.h>
-#include <include/core/SkData.h>
-#include <include/core/SkStream.h>
-#include <include/core/SkCanvas.h>
-#include <include/core/SkSurface.h>
-#include <tools/gpu/GrContextFactory.h>
+#include <core/SkCanvas.h>
+#include <core/SkPaint.h>
+#include <core/SkSurface.h>
+#include <gpu/gl/GrGLInterface.h>
+#include <gpu/GrDirectContext.h>
 
 void glfw_error_callback(int error, const char *description)
 {
@@ -82,8 +73,8 @@ int main()
 
         while (!glfwWindowShouldClose(window.getBackendWindow()))
         {
-            // glfwWaitEvents();
-            glfwPollEvents();
+            glfwWaitEvents();
+            // glfwPollEvents();
 
             SkPaint paint;
             paint.setColor(SK_ColorYELLOW);
@@ -103,10 +94,6 @@ int main()
 
             grContext->flush();
             glfwSwapBuffers(window.getBackendWindow());
-
-            // glfwWaitEvents is an alternative
-            // glfwPollEvents();
-            //            std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
 
         cleanup_skia();
