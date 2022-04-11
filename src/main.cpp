@@ -1,4 +1,5 @@
 #include "window.hpp"
+#include "button.hpp"
 
 #include <cstdlib>
 #include <iostream>
@@ -34,8 +35,10 @@ void initSkia(int w, int h)
 
     GrBackendRenderTarget grBackendRenderTarget(w, h, 0, 0, fbInfo);
 
+    // even though we set the origin to kBottomLeft_GrSurfaceOrigin, this makes
+    // sets the origin to the top left corner...
     skSurface = SkSurface::MakeFromBackendRenderTarget(grContext, grBackendRenderTarget,
-                                                       kTopLeft_GrSurfaceOrigin,
+                                                       kBottomLeft_GrSurfaceOrigin,
                                                        colorType,
                                                        nullptr,
                                                        nullptr)
@@ -68,29 +71,25 @@ int main()
 
         initSkia(window.getWidth(), window.getHeight());
 
-        SkCanvas *canvas = skSurface->getCanvas();
+        SkCanvas *pCanvas = skSurface->getCanvas();
         float f = 10;
+
+        guis::Button b;
+        b.setX(10);
+        b.setY(10);
+        b.setWidth(100);
+        b.setHeight(45);
+
+        SkCanvas &canvas = *pCanvas;
 
         while (!glfwWindowShouldClose(window.getBackendWindow()))
         {
             glfwWaitEvents();
             // glfwPollEvents();
 
-            SkPaint paint;
-            paint.setColor(SK_ColorYELLOW);
+            pCanvas->clear(SK_ColorWHITE);
 
-            canvas->drawPaint(paint);
-
-            paint.setColor(SK_ColorBLUE);
-            SkPoint p;
-            p.set(f, 10);
-
-            f += 1;
-
-            if (f > window.getWidth())
-                f = 0;
-
-            canvas->drawCircle(p, 10, paint);
+            b.draw(canvas);
 
             grContext->flush();
             glfwSwapBuffers(window.getBackendWindow());
