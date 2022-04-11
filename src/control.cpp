@@ -7,7 +7,12 @@ namespace guis
     void Control::draw(SkCanvas &canvas) const
     {
         SkPaint paint;
-        paint.setColor(SK_ColorBLUE);
+
+        if (_isMouseOver)
+            paint.setColor(SK_ColorGREEN);
+        else
+            paint.setColor(SK_ColorBLUE);
+
         paint.setStyle(SkPaint::kFill_Style);
 
         SkRect rect;
@@ -54,5 +59,10 @@ namespace guis
     void Control::setHeight(int height)
     {
         _height = height;
+    }
+
+    void Control::setIsMouseOver(bool value)
+    {
+        _isMouseOver = value;
     }
 }

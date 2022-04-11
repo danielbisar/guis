@@ -1,6 +1,9 @@
 #pragma once
 
 #include <GLFW/glfw3.h>
+#include <vector>
+
+#include <control.hpp>
 
 namespace guiserver
 {
@@ -25,8 +28,17 @@ namespace guiserver
 
         GLFWwindow *getBackendWindow() { return _window; }
 
+        void cursorPositionCallback(double x, double y);
+
+        void addControl(guis::Control &control);
+        void drawContent(SkCanvas &canvas);
+
     private:
-        int _width, _height;
+        int _width,
+            _height;
+
+        std::vector<guis::Control> _controls;
+
         GLFWwindow *_window;
     };
 }

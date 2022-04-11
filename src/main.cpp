@@ -86,7 +86,7 @@ int main()
         for (YAML::const_iterator it = n.begin(); it != n.end(); it++)
         {
             guis::Control control = (*it)["control"].as<guis::Control>();
-            controls.push_back(control);
+            window.addControl(control);
         }
 
         while (!glfwWindowShouldClose(window.getBackendWindow()))
@@ -94,10 +94,7 @@ int main()
             glfwWaitEvents();
             // glfwPollEvents();
 
-            canvas.clear(SK_ColorWHITE);
-
-            for (const guis::Control &control : controls)
-                control.draw(canvas);
+            window.drawContent(canvas);
 
             grContext->flush();
             glfwSwapBuffers(window.getBackendWindow());

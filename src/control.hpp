@@ -11,6 +11,7 @@ namespace guis
         int _y;
         int _width;
         int _height;
+        bool _isMouseOver;
 
     public:
         void draw(SkCanvas &canvas) const;
@@ -24,5 +25,7 @@ namespace guis
         void setY(int y);
         void setWidth(int width);
         void setHeight(int height);
+
+        void setIsMouseOver(bool value);
     };
 }
