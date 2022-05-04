@@ -36,7 +36,7 @@ target_include_directories(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME}
     dl
     glfw
-    "../skia/skia/out/static/libskia.a"
+    "../../skia/skia/out/static/libskia.a"
     jpeg
     freetype
     z
