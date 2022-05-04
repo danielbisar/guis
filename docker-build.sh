@@ -27,9 +27,7 @@ python3 tools/git-sync-deps
 source "./third_party/externals/emsdk/emsdk_env.sh"
 echo 'script_executable = "python3"' >>./.gn
 
-#
-#vim gn/toolchain/BUILD.gn
-#-> replace occurences of python by python3
+sed -i 's/python /python3 /' gn/toolchain/BUILD.gn
 
 gn gen out/static --args='is_debug=false is_official_build=true'
 ninja -C out/static/
