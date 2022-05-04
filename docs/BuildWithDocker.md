@@ -1,0 +1,1 @@
+docker run -it ubuntu /bin/bash -c 'apt update -y && apt upgrade -y && apt install git && cd && mkdir src && cd src && git clone https://github.com/danielbisar/guis.git && cd guis && ./docker-build.sh && /bin/bash'

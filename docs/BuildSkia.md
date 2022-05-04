@@ -25,12 +25,10 @@ cd skia
 git checkout chrome/m101
 
 python3 tools/git-sync-deps
-source "/home/daniel/src/skia/skia/third_party/externals/emsdk/emsdk_env.sh
+source "./third_party/externals/emsdk/emsdk_env.sh
+echo 'script_executable = "python3"' >> ./.gn
 
-#manually add to ./.gn file
-script_executable = "python3"
-
-gn gen out/Static --args='is_debug=false is_official_build=true cc="clang-14" cxx="clang++-14"'
+gn gen out/static --args='is_debug=false is_official_build=true cc="clang-14" cxx="clang++-14"'
 ninja -C out/Static/
 
 
