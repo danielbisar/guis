@@ -3,7 +3,7 @@
 # this stuff is just to get the skia lib compiled...
 apt update
 apt upgrade -y
-apt install -y libfreetype6-dev libglib2.0-dev libcairo2-dev meson pkg-config gtk-doc-tools generate-ninja git libjpeg-dev libgl-dev libicu-dev libwebp-dev
+apt install -y libfreetype6-dev libglib2.0-dev libcairo2-dev meson pkg-config gtk-doc-tools generate-ninja git libjpeg-dev libgl-dev libicu-dev libwebp-dev cmake
 
 cd
 mkdir -p src/skia
