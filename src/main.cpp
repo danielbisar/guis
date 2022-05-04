@@ -62,11 +62,11 @@ void cleanup_skia()
 }
 
 // TODO move into class, this is just a quick test
-SkCanvas &gcanvas;
+SkCanvas *gcanvas;
 string line(string name)
 {
     SkPaint paint;
-    gcanvas.drawLine(0, 0, 100, 100, paint);
+    gcanvas->drawLine(0, 0, 100, 100, paint);
     return "Hi " + name + ".";
 }
 
@@ -102,7 +102,7 @@ int main()
 
         bool shouldClose = false;
         // TODO move to class
-        gcanvas = canvas;
+        gcanvas = pCanvas;
 
         while (shouldClose || !glfwWindowShouldClose(window.getBackendWindow()))
         {
