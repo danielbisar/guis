@@ -31,6 +31,7 @@ target_include_directories(${PROJECT_NAME}
     "src/"
     "../skia/skia/include"
     "../skia/skia"
+    "submodules/simpleREPL/src"
     ${OPENGL_INCLUDE_DIRS})
 
 target_link_libraries(${PROJECT_NAME}

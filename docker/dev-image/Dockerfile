@@ -11,4 +11,8 @@ RUN apt-get install -y libglfw3-dev libyaml-cpp-dev
 COPY ./clone-and-build-skia.sh /tmp
 RUN cd /tmp && ./clone-and-build-skia.sh
 
-CMD [ "/bin/bash" ]
+# install docs etc for development
+RUN unminimize
+
+COPY entrypoint.sh /tmp
+ENTRYPOINT [ "/bin/bash", "/tmp/entrypoint.sh" ]
