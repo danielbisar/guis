@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# this stuff is just to get the skia lib compiled...
 apt update
 apt upgrade -y
 apt install -y libfreetype6-dev libglib2.0-dev libcairo2-dev meson pkg-config gtk-doc-tools generate-ninja git libjpeg-dev libgl-dev libicu-dev libwebp-dev
@@ -32,6 +34,7 @@ sed -i 's/python /python3 /' gn/toolchain/BUILD.gn
 gn gen out/static --args='is_debug=false is_official_build=true'
 ninja -C out/static/
 
+# now we can build guis
 cd ../..
 cd guis
 ./build.sh

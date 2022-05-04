@@ -29,14 +29,14 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 target_include_directories(${PROJECT_NAME}
     PRIVATE
     "src/"
-    "/home/daniel/src/skia/skia/include"
-    "/home/daniel/src/skia/skia"
+    "../skia/skia/include"
+    "../skia/skia"
     ${OPENGL_INCLUDE_DIRS})
 
 target_link_libraries(${PROJECT_NAME}
     dl
     glfw
-    "/home/daniel/src/skia/skia/out/Static/libskia.a"
+    "../skia/skia/out/static/libskia.a"
     jpeg
     freetype
     z
