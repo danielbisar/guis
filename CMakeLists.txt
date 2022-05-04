@@ -22,7 +22,7 @@ find_package(OpenGL REQUIRED)
 
 link_directories("/usr/lib/x86_64-linux-gnu/")
 
-file(GLOB SOURCES src/*.cpp)
+file(GLOB SOURCES src/*.cpp submodules/simpleREPL/src/io.cc)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 

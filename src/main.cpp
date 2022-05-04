@@ -61,33 +61,17 @@ void cleanup_skia()
     delete grContext;
 }
 
-string greet(string name)
+// TODO move into class, this is just a quick test
+SkCanvas &gcanvas;
+string line(string name)
 {
+    SkPaint paint;
+    gcanvas.drawLine(0, 0, 100, 100, paint);
     return "Hi " + name + ".";
-}
-
-int increase(int a)
-{
-    return a + 1;
-}
-
-float multiply(float a, int b)
-{
-    return a * b;
 }
 
 int main()
 {
-    while (interface(
-        func(greet, "greet", "Say hi to someone.",
-             param("name", "a name")),
-        func(increase, "inc", "Increase an integer value.",
-             param("value", "a value")),
-        func(multiply, "mul", "Multiply a float with an integer.",
-             param("-a", 1.1F, "float value"),
-             param("b", "multiplier"))))
-        ;
-
     std::cout << "init glfw" << std::endl;
 
     if (!glfwInit())
@@ -116,10 +100,16 @@ int main()
             window.addControl(control);
         }
 
-        while (!glfwWindowShouldClose(window.getBackendWindow()))
+        bool shouldClose = false;
+        // TODO move to class
+        gcanvas = canvas;
+
+        while (shouldClose || !glfwWindowShouldClose(window.getBackendWindow()))
         {
             glfwWaitEvents();
             // glfwPollEvents();
+
+            shouldClose = interface(func(line, "line", "Draw a line."));
 
             window.drawContent(canvas);
 
